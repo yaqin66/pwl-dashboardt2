@@ -17,7 +17,7 @@
             <a class="nav-link" data-widget="navbar-search" href="#" role="button">
                 <i class="fas fa-search"></i>
             </a>
-            <div class="navbar-search-block">
+            <!-- <div class="navbar-search-block">
                 <form class="form-inline">
                     <div class="input-group input-group-sm">
                         <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
@@ -31,7 +31,7 @@
                         </div>
                     </div>
                 </form>
-            </div>
+            </div> -->
         </li>
 
         <!-- Notifications Dropdown Menu -->
@@ -67,10 +67,24 @@
                 <i class="fas fa-expand-arrows-alt"></i>
             </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
-                <i class="fas fa-th-large"></i>
+        <!-- User Dropdown Menu -->
+        <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+                <i class="far fa-user mr-1"></i> {{ Auth::user()->name ?? 'User' }}
             </a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a href="{{ route('profile') }}" class="dropdown-item">
+                    <i class="fas fa-user-cog mr-2"></i> Pengaturan Profile
+                </a>
+                <div class="dropdown-divider"></div>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <a href="{{ route('logout') }}" class="dropdown-item text-danger"
+                       onclick="event.preventDefault(); this.closest('form').submit();">
+                        <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                    </a>
+                </form>
+            </div>
         </li>
     </ul>
 </nav>

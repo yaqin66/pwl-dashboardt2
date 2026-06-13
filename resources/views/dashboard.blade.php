@@ -27,10 +27,10 @@
 
         <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
-                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-chart-bar"></i></span>
+                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-bullhorn"></i></span>
                 <div class="info-box-content">
-                    <span class="info-box-text">Statistik</span>
-                    <span class="info-box-number">150</span>
+                    <span class="info-box-text">Marketing Users</span>
+                    <span class="info-box-number">{{ $totalMarketing ?? 0 }}</span>
                 </div>
             </div>
         </div>
@@ -39,18 +39,18 @@
             <div class="info-box mb-3">
                 <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
                 <div class="info-box-content">
-                    <span class="info-box-text">Transaksi</span>
-                    <span class="info-box-number">760</span>
+                    <span class="info-box-text">Total Transaksi</span>
+                    <span class="info-box-number">{{ $totalTransactions ?? 0 }}</span>
                 </div>
             </div>
         </div>
 
         <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
-                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-user-plus"></i></span>
+                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-money-bill-wave"></i></span>
                 <div class="info-box-content">
-                    <span class="info-box-text">User Baru</span>
-                    <span class="info-box-number">{{ $newUsersThisMonth ?? 0 }}</span>
+                    <span class="info-box-text">Pemasukan</span>
+                    <span class="info-box-number">Rp {{ number_format($totalPemasukan ?? 0, 0, ',', '.') }}</span>
                 </div>
             </div>
         </div>
@@ -64,7 +64,7 @@
                 <div class="card-header">
                     <h3 class="card-title">
                         <i class="fas fa-chart-pie mr-1"></i>
-                        Statistik Bulanan
+                        Statistik Transaksi Tahun {{ $currentYear ?? date('Y') }}
                     </h3>
                     <div class="card-tools">
                         <ul class="nav nav-pills ml-auto">
@@ -86,84 +86,6 @@
                             <canvas id="sales-chart-canvas" height="300" style="height: 300px;"></canvas>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- TO DO List -->
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">
-                        <i class="fas fa-tasks mr-1"></i>
-                        To Do List
-                    </h3>
-                </div>
-                <div class="card-body">
-                    <ul class="todo-list" data-widget="todo-list">
-                        <li>
-                            <span class="handle">
-                                <i class="fas fa-ellipsis-v"></i>
-                                <i class="fas fa-ellipsis-v"></i>
-                            </span>
-                            <div class="icheck-primary d-inline ml-2">
-                                <input type="checkbox" value="" name="todo1" id="todoCheck1">
-                                <label for="todoCheck1"></label>
-                            </div>
-                            <span class="text">Design a Nice Theme</span>
-                            <small class="badge badge-danger"><i class="far fa-clock"></i> 2 mins</small>
-                            <div class="tools">
-                                <i class="fas fa-edit"></i>
-                                <i class="fas fa-trash-o"></i>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="handle">
-                                <i class="fas fa-ellipsis-v"></i>
-                                <i class="fas fa-ellipsis-v"></i>
-                            </span>
-                            <div class="icheck-primary d-inline ml-2">
-                                <input type="checkbox" value="" name="todo2" id="todoCheck2">
-                                <label for="todoCheck2"></label>
-                            </div>
-                            <span class="text">Make the theme responsive</span>
-                            <small class="badge badge-info"><i class="far fa-clock"></i> 4 hours</small>
-                            <div class="tools">
-                                <i class="fas fa-edit"></i>
-                                <i class="fas fa-trash-o"></i>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="handle">
-                                <i class="fas fa-ellipsis-v"></i>
-                                <i class="fas fa-ellipsis-v"></i>
-                            </span>
-                            <div class="icheck-primary d-inline ml-2">
-                                <input type="checkbox" value="" name="todo3" id="todoCheck3">
-                                <label for="todoCheck3"></label>
-                            </div>
-                            <span class="text">Buat laporan mingguan</span>
-                            <small class="badge badge-warning"><i class="far fa-clock"></i> 1 day</small>
-                            <div class="tools">
-                                <i class="fas fa-edit"></i>
-                                <i class="fas fa-trash-o"></i>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="handle">
-                                <i class="fas fa-ellipsis-v"></i>
-                                <i class="fas fa-ellipsis-v"></i>
-                            </span>
-                            <div class="icheck-primary d-inline ml-2">
-                                <input type="checkbox" value="" name="todo4" id="todoCheck4">
-                                <label for="todoCheck4"></label>
-                            </div>
-                            <span class="text">Review database schema</span>
-                            <small class="badge badge-success"><i class="far fa-clock"></i> 3 days</small>
-                            <div class="tools">
-                                <i class="fas fa-edit"></i>
-                                <i class="fas fa-trash-o"></i>
-                            </div>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </section>
@@ -189,7 +111,7 @@
                 <div class="card-header">
                     <h3 class="card-title">
                         <i class="fas fa-clock mr-1"></i>
-                        Aktivitas Terbaru
+                        Transaksi Terbaru
                     </h3>
                 </div>
                 <div class="card-body p-0">
@@ -197,38 +119,43 @@
                         <table class="table m-0">
                             <thead>
                                 <tr>
-                                    <th>Aktivitas</th>
-                                    <th>Waktu</th>
+                                    <th>Keterangan</th>
+                                    <th>Nominal</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @forelse($recentTransactions ?? [] as $trx)
                                 <tr>
-                                    <td>User baru terdaftar</td>
-                                    <td>5 menit lalu</td>
-                                    <td><span class="badge badge-success">Sukses</span></td>
+                                    <td>{{ $trx->keterangan }}</td>
+                                    <td>
+                                        @if($trx->jenis == 'masuk')
+                                            <span class="text-success">+ Rp {{ number_format($trx->nominal, 0, ',', '.') }}</span>
+                                        @else
+                                            <span class="text-danger">- Rp {{ number_format($trx->nominal, 0, ',', '.') }}</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($trx->status == 'berhasil')
+                                            <span class="badge badge-success">Berhasil</span>
+                                        @elseif($trx->status == 'pending')
+                                            <span class="badge badge-warning">Pending</span>
+                                        @else
+                                            <span class="badge badge-danger">Batal</span>
+                                        @endif
+                                    </td>
                                 </tr>
+                                @empty
                                 <tr>
-                                    <td>Data diperbarui</td>
-                                    <td>1 jam lalu</td>
-                                    <td><span class="badge badge-info">Info</span></td>
+                                    <td colspan="3" class="text-center">Belum ada transaksi</td>
                                 </tr>
-                                <tr>
-                                    <td>Backup database</td>
-                                    <td>3 jam lalu</td>
-                                    <td><span class="badge badge-warning">Pending</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Server maintenance</td>
-                                    <td>Kemarin</td>
-                                    <td><span class="badge badge-danger">Penting</span></td>
-                                </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <div class="card-footer clearfix">
-                    <a href="#" class="btn btn-sm btn-secondary float-right">Lihat Semua</a>
+                    <a href="{{ route('transactions.index') }}" class="btn btn-sm btn-secondary float-right">Lihat Semua Transaksi</a>
                 </div>
             </div>
 
@@ -261,26 +188,26 @@ $(function () {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
         datasets: [
             {
-                label: 'Data Tahun Ini',
-                backgroundColor: 'rgba(60,141,188,0.9)',
-                borderColor: 'rgba(60,141,188,0.8)',
+                label: 'Pemasukan',
+                backgroundColor: 'rgba(40, 167, 69, 0.9)',
+                borderColor: 'rgba(40, 167, 69, 0.8)',
                 pointRadius: 3,
-                pointColor: '#3b8bba',
-                pointStrokeColor: 'rgba(60,141,188,1)',
+                pointColor: '#28a745',
+                pointStrokeColor: 'rgba(40, 167, 69, 1)',
                 pointHighlightFill: '#fff',
-                pointHighlightStroke: 'rgba(60,141,188,1)',
-                data: [28, 48, 40, 19, 86, 27, 90, 65, 59, 80, 81, 56]
+                pointHighlightStroke: 'rgba(40, 167, 69, 1)',
+                data: {!! json_encode($monthlyPemasukan ?? array_fill(0,12,0)) !!}
             },
             {
-                label: 'Data Tahun Lalu',
-                backgroundColor: 'rgba(210, 214, 222, 1)',
-                borderColor: 'rgba(210, 214, 222, 1)',
+                label: 'Pengeluaran',
+                backgroundColor: 'rgba(220, 53, 69, 0.9)',
+                borderColor: 'rgba(220, 53, 69, 0.8)',
                 pointRadius: 3,
-                pointColor: 'rgba(210, 214, 222, 1)',
-                pointStrokeColor: '#c1c7d1',
+                pointColor: '#dc3545',
+                pointStrokeColor: 'rgba(220, 53, 69, 1)',
                 pointHighlightFill: '#fff',
-                pointHighlightStroke: 'rgba(220,220,220,1)',
-                data: [65, 59, 80, 81, 56, 55, 40, 35, 30, 45, 50, 70]
+                pointHighlightStroke: 'rgba(220, 53, 69, 1)',
+                data: {!! json_encode($monthlyPengeluaran ?? array_fill(0,12,0)) !!}
             },
         ]
     };
@@ -309,11 +236,15 @@ $(function () {
 
     // Donut Chart
     var donutChartCanvas = document.getElementById('sales-chart-canvas').getContext('2d');
+    
+    var totalPemasukanDonut = {!! ($totalPemasukan ?? 0) !!};
+    var totalPengeluaranDonut = {!! ($totalPengeluaran ?? 0) !!};
+    
     var donutData = {
-        labels: ['User Aktif', 'User Baru', 'User Non-Aktif'],
+        labels: ['Pemasukan', 'Pengeluaran'],
         datasets: [{
-            data: [700, 500, 400],
-            backgroundColor: ['#f56954', '#00a65a', '#f39c12'],
+            data: [totalPemasukanDonut, totalPengeluaranDonut],
+            backgroundColor: ['#28a745', '#dc3545'],
         }]
     };
     var donutOptions = {
