@@ -1,1 +1,1 @@
-menu baru untuk export-pdf di branch menu-export
+fitur baru dimenu transaksi ada untuk export-pdf di branch menu-export
